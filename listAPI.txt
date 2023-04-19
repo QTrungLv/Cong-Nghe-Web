@@ -1,0 +1,21 @@
+Danh sách API
+
+POST /user/login: Đăng nhập
+POST /user: Chỉnh sửa thông tin ---Cái này để lại---
+GET  /user:
+
+POST /video: Thêm video
+GET  /video: Lấy danh sách video
+
+GET /video/:id: Lấy một video cụ thể
+POST or PUT /video/:id: chỉnh sửa thông tin video(comment, thời gian, video mới, viewer, title, ...)
+
+POST /video/:id/comment  or PUT /video/:id: Thêm comment cho video
+API: POST /video/:id/share	or PUT /video/:id
+
+Delete	API: DELETE /video/:id
+Sửa title	API: POST /video/:id/title	or PUT /video/:id
+List 		API: POST /video/:id/list	or PUT /video/:id
+
+API: POST /user/list		or PUT /user
+API: DELETE /user/list
