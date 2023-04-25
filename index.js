@@ -1,14 +1,14 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-
+const route = require('./routes')
 require('dotenv').config()
 
 const app = express();
 
 const connectDB = async () => {
     try {
-        await mongoose.connect(`mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cong-nghe-web.96rc9z7.mongodb.net/?retryWrites=true&w=majority`, {
+        await mongoose.connect('mongodb://127.0.0.1:27017/DB_Test', {
 
         })
         console.log("Connected to database successfully")
@@ -23,4 +23,5 @@ connectDB()
 app.use(express.json())
 app.use(cors())
 
-app.listen(process.env.PORT, () => console.log(`Server started on port ${process.env.PORT}`))
+route(app);
+app.listen(3000);
