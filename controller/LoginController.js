@@ -1,9 +1,10 @@
 const passport = require('passport')
 const GoogleStrategy = require( 'passport-google-oauth2' ).Strategy;
-
+const JWT = require('jsonwebtoken');
 const GOOGLE_CLIENT_ID = '613658840979-vlgba1s1g94h38vbe2q2r3ovh8t2169e.apps.googleusercontent.com';
 const GOOGLE_CLIENT_SECRET = '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';
 const User = require('../models/User');
+
 
 passport.use(new GoogleStrategy({
   clientID: '613658840979-vlgba1s1g94h38vbe2q2r3ovh8t2169e.apps.googleusercontent.com',
@@ -31,7 +32,6 @@ passport.use(new GoogleStrategy({
       } catch (err) {
           console.error(err);
       }
-
   }
 ));
 
@@ -43,3 +43,19 @@ passport.deserializeUser(function(user, done) {
   done(null, user);
 });
 
+
+class UserController{
+
+  fail(req, res){
+    res.send('Failed to authenticate..');
+  }
+
+  show(req, res){
+    res.send('Hello');
+  }
+  index(req, res){
+    res.send('<a href = "/login/auth/google">Authenticate with Google</a>');
+  }
+}
+
+module.exports = new UserController;

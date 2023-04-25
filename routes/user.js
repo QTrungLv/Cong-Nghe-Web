@@ -4,7 +4,7 @@ const router = express.Router();
 const passport = require('passport')
 const session = require('express-session');
 require('../controller/LoginController')
-
+const userController = require('../controller/LoginController')
 function isLoggedIn(req, res, next) {
     req.user ? next() : res.sendStatus(401);
   }
@@ -24,15 +24,9 @@ router.get( '/auth/google/callback',
   })
 );
 
-router.get('/auth/google/failure', (req, res) => {
-    res.send('Failed to authenticate..');
-  });
+router.get('/auth/google/failure', userController.fail);
 
-  router.get('/protected',isLoggedIn, (req, res) => {
-    res.send('Hello');
-  });
+  router.get('/protected',isLoggedIn, userController.show);
 
-  router.get('/', (req, res) => {
-    res.send('<a href = "/login/auth/google">Authenticate with Google</a>');
-})
+  router.get('/', userController.index)
   module.exports = router;
