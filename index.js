@@ -4,6 +4,8 @@ const cors = require('cors');
 
 require('dotenv').config()
 
+const userRoute = require('./routes/userRoute')
+const videoRoute = require('./routes/videoRoute')
 const app = express();
 
 const connectDB = async () => {
@@ -22,5 +24,8 @@ connectDB()
 
 app.use(express.json())
 app.use(cors())
+
+app.use("/user", userRoute)
+app.use("/video", videoRoute)
 
 app.listen(process.env.PORT, () => console.log(`Server started on port ${process.env.PORT}`))

@@ -5,6 +5,7 @@ folders:
 -middleware: Chứa các middleware 
 -models: Chứa các model của project
 -services: Thao tác CRED đối với database
+-controller: xử lý req, trả về res
 -routes: Chứa các file xử lý call API 
 index: file chạy đầu tiên
 
