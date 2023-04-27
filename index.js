@@ -1,10 +1,12 @@
+require('dotenv').config()
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const route = require('./routes')
-require('dotenv').config()
+
 
 const app = express();
+
 
 const connectDB = async () => {
     try {
@@ -24,4 +26,4 @@ app.use(express.json())
 app.use(cors())
 
 route(app);
-app.listen(3000);
+app.listen(process.env.PORT, () => console.log(`Server started on port ${process.env.PORT}`))
