@@ -9,8 +9,9 @@ GET  /video: Lấy danh sách video
 
 GET /video/:id: Lấy một video cụ thể
 POST or PUT /video/:id: chỉnh sửa thông tin video(comment, thời gian, video mới, viewer, title, ...)
-
+    
 POST /video/:id/comment  or PUT /video/:id: Thêm comment cho video
+GET /video/:id/comment: Lấy danh sách comment sẵn có của video
 API: POST /video/:id/share	or PUT /video/:id
 
 Delete	API: DELETE /video/:id
@@ -19,5 +20,3 @@ List 		API: POST /video/:id/list	or PUT /video/:id
 
 API: POST /user/list		or PUT /user
 API: DELETE /user/list
-
-

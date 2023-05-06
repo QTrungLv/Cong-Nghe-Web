@@ -10,8 +10,13 @@ exports.getInfoUser = async (req, res) => {
         .catch(err => {
             res.status(404).send({ success: false, err: err.message })
         })
-
 }
+
+exports.updateInfoUser = (req, res) => {
+    
+}
+
+
 
 
 

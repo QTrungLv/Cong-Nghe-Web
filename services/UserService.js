@@ -2,7 +2,7 @@ const User = require("../models/User")
 
 exports.creatUser = async (user) => {
     try {
-        const user = await User
+        const user = await User({})
     } catch (error) {
 
     }
