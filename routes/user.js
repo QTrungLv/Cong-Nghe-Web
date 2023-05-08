@@ -4,8 +4,9 @@ const router = express.Router();
 const passport = require('passport')
 const session = require('express-session');
 require('../controller/LoginController')
-const userController = require('../controller/LoginController')
+const userLoginController = require('../controller/LoginController')
 const { OAuth2Client } = require('google-auth-library');
+const  userController  = require('../controller/UserController'); 
 function isLoggedIn(req, res, next) {
     req.user ? next() : res.sendStatus(401);
   }
@@ -14,21 +15,22 @@ function isLoggedIn(req, res, next) {
 router.use(passport.initialize());
 router.use(passport.session());
 
-router.get('/auth/google',
+router.get('/login/auth/google',
   passport.authenticate('google', { scope: [ 'email', 'profile' ] }
 ));
 
-router.get( '/auth/google/callback',
+router.get( '/login/auth/google/callback',
   passport.authenticate( 'google', {
-    failureRedirect: '/auth/google/failure'
-  }),userController.login);
+    failureRedirect: '/login/auth/google/failure'
+  }),userLoginController.login);
 
-router.get('/auth/google/failure', userController.fail);
 
-  router.get('/protected',isLoggedIn, userController.show);
-
-  router.get('/', userController.index)
+router.get('/login/auth/google/failure', userLoginController.fail);
+  router.get('/login/protected',isLoggedIn, userLoginController.show);
+  router.get('/search', userController.searchUserController);
+  router.get('/login', userLoginController.index)
   module.exports = router;
+
 
 
   //successRedirect: '/login/protected',

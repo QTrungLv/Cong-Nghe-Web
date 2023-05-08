@@ -10,7 +10,7 @@ const app = express();
 
 const connectDB = async () => {
     try {
-        await mongoose.connect('mongodb://127.0.0.1:27017/DB_Test', {
+        await mongoose.connect(`mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cong-nghe-web.96rc9z7.mongodb.net/?retryWrites=true&w=majority`, {
 
         })
         console.log("Connected to database successfully")

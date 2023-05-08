@@ -1,10 +1,9 @@
 
-const loginRouter = require('./user')
+const userRouter = require('./user')
 
 function route(app){
 
-    app.use('/login', loginRouter)
-
+    app.use('/user', userRouter)
 }
 
 module.exports = route;

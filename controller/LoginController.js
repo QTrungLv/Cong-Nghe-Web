@@ -10,7 +10,7 @@ const JWT_SECRET = 'YOUR_JWT_SECRET';
 passport.use(new GoogleStrategy({
   clientID: '613658840979-vlgba1s1g94h38vbe2q2r3ovh8t2169e.apps.googleusercontent.com',
   clientSecret: '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',
-  callbackURL: "http://localhost:3000/login/auth/google/callback"
+  callbackURL: "http://localhost:3000/user/login/auth/google/callback"
 },
   async function (req,res, profile, done) {
       try {
@@ -55,14 +55,14 @@ class UserController{
     res.send('Hello');
   }
   index(req, res){
-    res.send('<a href = "/login/auth/google">Authenticate with Google</a>');
+    res.send('<a href = "/user/login/auth/google">Authenticate with Google</a>');
   }
   
   login(req, res){
     const { Id, email, name, avatar } = req.user;
     const token = jwt.sign({ Id, email, name, avatar }, 'mysecretkey', { expiresIn: '1h' });
     console.log({token});
-    res.redirect('/login/protected');
+    res.redirect('/user/login/protected');
   }
 }
 
