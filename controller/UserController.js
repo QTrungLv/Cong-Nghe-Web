@@ -1,3 +1,4 @@
+const { use } = require('passport')
 const userService = require('../services/UserService')
 
 class UserController{
@@ -22,6 +23,19 @@ class UserController{
         })
     }
   }
+
+   detailsUserController = async (req, res) => {
+    try{
+            const response = await userService.getDetailsUserService()
+            return res.json(response)
+        
+    }catch(e){
+        console.log(e)
+        return res.json({
+            status: 'err',
+        })
+    }
+}
 }
 
 module.exports = new UserController;

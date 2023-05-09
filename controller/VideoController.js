@@ -1,3 +1,6 @@
+
+/*
+
 const videoService = require('../services/VideoService')
 
 class VideoController{
@@ -25,3 +28,5 @@ class VideoController{
 }
 
 module.exports = new VideoController;
+
+*/

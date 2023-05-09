@@ -3,7 +3,7 @@ const express = require('express');
 const router = express.Router();
 const passport = require('passport')
 const session = require('express-session');
-require('../controller/LoginController')
+
 const userLoginController = require('../controller/LoginController')
 const { OAuth2Client } = require('google-auth-library');
 const  userController  = require('../controller/UserController'); 
@@ -24,11 +24,13 @@ router.get( '/login/auth/google/callback',
     failureRedirect: '/login/auth/google/failure'
   }),userLoginController.login);
 
-
+  router.get('/getInfo', userController.detailsUserController);
 router.get('/login/auth/google/failure', userLoginController.fail);
   router.get('/login/protected',isLoggedIn, userLoginController.show);
   router.get('/search', userController.searchUserController);
+
   router.get('/login', userLoginController.index)
+
   module.exports = router;
 
 

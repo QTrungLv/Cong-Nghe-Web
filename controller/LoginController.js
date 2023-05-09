@@ -45,7 +45,7 @@ passport.deserializeUser(function(user, done) {
 
 
 
-class UserController{
+class LoginController{
 
   fail(req, res){
     res.send('Failed to authenticate..');
@@ -55,6 +55,8 @@ class UserController{
     res.send('Hello');
   }
   index(req, res){
+    console.log('1')
+
     res.send('<a href = "/user/login/auth/google">Authenticate with Google</a>');
   }
   
@@ -66,4 +68,4 @@ class UserController{
   }
 }
 
-module.exports = new UserController;
+module.exports = new LoginController;
