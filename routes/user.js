@@ -28,7 +28,6 @@ router.get( '/login/auth/google/callback',
 router.get('/login/auth/google/failure', userLoginController.fail);
   router.get('/login/protected',isLoggedIn, userLoginController.show);
   router.get('/search', userController.searchUserController);
-
   router.get('/login', userLoginController.index)
 
   module.exports = router;

@@ -35,6 +35,29 @@ class UserService{
     }).catch(e => e)
 }
 
+ getUserService = (id) => {
+    return new Promise(async (resolve, reject) => {
+        try{
+            const findUser = await User.findById({_id: id})
+            if(findUser){
+                resolve({
+                    status: 'OK', 
+                    data: findUser
+                })
+            }
+            resolve({
+                status: 'OK',
+                message: 'the user is not defined'
+            })
+        }catch(err){
+            reject({
+                message: err,
+                status: 'err'
+            })
+        }
+    }).catch(e => e)
+}
+
  getDetailsUserService = () => {
     return new Promise(async (resolve, reject) => {
         try{
