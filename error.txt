@@ -1,3 +1,5 @@
 401: No file found!
 402: Error while uploading image
 403: erroe.message - When u
+
+405: 

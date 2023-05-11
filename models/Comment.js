@@ -17,8 +17,8 @@ const CommentSchema = new Schema({
         default: Date.now
     },
     author: {
-        type: User,
-        required: true
+        type: Schema.Types.ObjectId,
+        ref: 'users'
     }
 })
 
