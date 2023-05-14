@@ -14,7 +14,7 @@ class VideoService{
                 var skipNumber = (page-1)*PAGE_SIZE
                 const findTitle = await Video.find({
                     title:{$regex:title}
-                })
+                }).populate('viewers').populate('comments')
                 .skip(skipNumber)
                 .limit(PAGE_SIZE)
                 if(findTitle){
@@ -38,10 +38,39 @@ class VideoService{
     }).catch(e => e)
 }
 
+getAllVideoService = (page) => {
+    return new Promise(async (resolve, reject) => {
+        try{
+            if(page){
+                page = parseInt(page)
+                var skipNumber = (page-1)*PAGE_SIZE
+                const getallvideo = await Video.find().populate('viewers').populate('comments')
+                .skip(skipNumber)
+                .limit(PAGE_SIZE)
+                if(getallvideo){
+                    resolve({
+                        status: 'OK', 
+                        data: getallvideo
+                    })
+                }
+            }
+            resolve({
+                status: 'OK',
+                message: 'the  is not defined'
+            })
+        }catch(err){
+            reject({
+                message: err,
+                status: 'err'
+            })
+        }
+    }).catch(e => e)
+}
+
 getVideoService = (id) => {
     return new Promise(async (resolve, reject) => {
         try{
-            const findVideo = await Video.findById({_id: id})
+            const findVideo = await Video.findById({_id: id}).populate('viewers').populate('comments')
             if(findVideo){
                 resolve({
                     status: 'OK', 
@@ -78,6 +107,40 @@ getVideoService = (id) => {
                 })
             }
         }catch(e){
+            reject({
+                status: 'err',
+                message: e
+            })
+        }
+    })
+}
+
+ updateVideoService = (id, data) => {
+    return new Promise(async (resolve, reject) => {
+        try{
+            const checkVideo = await Video.findOne(data)
+            if(checkVideo){
+                resolve({
+                    status: 'err',
+                    message: 'The info of video is duplicate'
+                })
+            }
+            const updatedVideo = await Video.findByIdAndUpdate(id, data, {new : true})
+            
+            if(updatedVideo) {
+                const getVideoNew = await this.getVideoService(id)
+                resolve({
+                    status: 'OK',
+                    data: getVideoNew
+                })
+            }else {
+                resolve({
+                    status: 'err',
+                    message: 'The video is not define'
+                })
+            }
+        }catch(e){
+            console.log(e)
             reject({
                 status: 'err',
                 message: e

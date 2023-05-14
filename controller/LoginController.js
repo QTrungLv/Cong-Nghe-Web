@@ -61,9 +61,9 @@ class LoginController{
   }
   
   login(req, res){
-    const { Id, email, name, avatar } = req.user;
-    const token = jwt.sign({ Id, email, name, avatar }, 'mysecretkey', { expiresIn: '1h' });
-    console.log({token});
+    const { isUser, email, name, avatar } = req.user;
+    const access_token = jwt.sign({ isUser, email, name, avatar }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '1h' });
+    console.log('access_token',{access_token})
     res.redirect('/user/login/protected');
   }
 }

@@ -14,6 +14,19 @@ const UserSchema = new Schema({
     avatar: {
         type: String,
     },
+    access_token: {
+        type: String,
+        unique: true
+    },
+    refresh_token: {
+        type: String,
+        unique: true
+    },
+    isUser:{
+        type: Boolean,
+        unique: true,
+        default: false
+    },
     createdAt: {
         type: Date,
         default: Date.now

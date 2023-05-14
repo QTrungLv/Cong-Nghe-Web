@@ -1,19 +1,20 @@
 Danh sách API
 
-POST /user/login: Đăng nhập
+POST /user/login: Đăng nhập(oke)
 POST /user: Chỉnh sửa thông tin ---Cái này để lại---
-GET  /user: Lấy thông tin người dùng
+GET  /user/getInfo: Lấy thông tin người dùng(oke)
 
 POST /video: Thêm video
-GET  /video: Lấy danh sách video
+GET  /video: Lấy danh sách video(oke)
 
-GET /video/:id: Lấy một video cụ thể
+GET /video/search?title=:title&page=:page: Tìm kiếm video dựa trên title(oke)
+GET /video/:id: Lấy một video cụ thể(oke)
 POST or PUT /video/:id: chỉnh sửa thông tin video(comment, thời gian, video mới, viewer, title, ...)
 
 POST /video/:id/comment  or PUT /video/:id: Thêm comment cho video
 API: POST /video/:id/share	or PUT /video/:id
 
-Delete	API: DELETE /video/:id
+Delete	API: DELETE /video/:id(oke)
 Sửa title	API: POST /video/:id/title	or PUT /video/:id
 List 		API: POST /video/:id/list	or PUT /video/:id
 
