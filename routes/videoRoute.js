@@ -17,7 +17,7 @@ router.put("/:id", verifyToken, videoController.changeVideoTitle)
 
 router.get("/comment/:id", verifyToken, videoController.getCommentVideo)
 
-router.post("/comment/:id", verifyToken, videoController.addCommentVideo)
+router.post("/comment/:id", videoController.addCommentVideo)
 
 router.delete(":id", verifyToken, videoController.deleteVideo)
 

@@ -15,10 +15,6 @@ DELETE /video/:id
 
 Sửa title	API: POST /video/title/:id	or PUT /video/:id -----Done
 
-API: POST /video/:id/share	or PUT /video/:id
-
-List 		API: POST /video/:id/list	or PUT /video/:id
-
 API: POST /user/list		or PUT /user
 
 API: DELETE /user/list
@@ -32,3 +28,7 @@ POST /video/comment/:id  or PUT /video/:id: Thêm comment cho video
 GET /video/comment/:id: Lấy danh sách comment sẵn có của video
 
 DELETE /video/comment/:id: Xóa comment ----Cái này để lại
+
+List 		API: POST /video/:id/list	or PUT /video/:id
+
+API: POST /video/:id/share	or PUT /video/:id

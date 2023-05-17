@@ -1,5 +1,5 @@
 // const { getStorage, ref, uploadBytes, getDownloadURL } = require('firebase/storage');
-const { addVideo, getVideoById } = require('../services/VideoService');
+const { addVideo, getVideoById, addComment } = require('../services/VideoService');
 const { uploadImageToFirebase } = require('../services/uploadVideo');
 
 // const storage = getStorage()
@@ -39,7 +39,7 @@ exports.changeVideoTitle = async (req, res) => {
 }
 
 exports.getCommentVideo = async (req, res) => {
-
+    
 }
 
 exports.updateInfoVideo = async (req, res) => {
@@ -47,6 +47,18 @@ exports.updateInfoVideo = async (req, res) => {
 }
 
 exports.addCommentVideo = async (req, res) => {
+    const _id = req.params.id;
+    //const { co } = req.body;
+
+    const comment = {
+        userId: "645ce5ba0a152a09451bdd51",
+        comment: "First Comment",
+        _id: _id
+    }
+
+    addComment({ comment: comment, videoId: _id })
+        .then((video) => res.send({ success: true, message: "Add comment successfully", video }))
+        .catch((err) => res.status(406).json(err.message))
 
 }
 
