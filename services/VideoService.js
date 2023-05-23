@@ -38,9 +38,9 @@ exports.changeVideoTitle = async ({ _id, title }) => {
 
 exports.getVideoById = async (_id) => {
     try {
-        const video = await Video.findById({ _id: _id })
+        const video = await Video.findById({ _id: _id }).populate('comments').populate('viewers')
         if (!video) {
-            throw new Error("Video not foung")
+            throw new Error("Video not found")
         }
         return video
     } catch (error) {
@@ -77,13 +77,71 @@ exports.addComment = async ({ comment, videoId }) => {
                     author: user
                 })
 
-                Video.findByIdAndUpdate({ _id: videoId }, { comments: { ...video.comments, newComment } })
+                const comments = video.comments
+
+                comments.push(newComment)
+
+                await Video.findByIdAndUpdate({ _id: videoId }, { comments: comments })
+
                 await newComment.save()
+
+                return video.populate("comments")
+            }
+        }
+    } catch (error) {
+        throw new Error(error.message)
+    }
+}
+
+exports.addViewer = async (userId, videoId) => {
+    try {
+
+        const user = await User.findById(userId)
+        if (!user) {
+            throw new Error("User not found!")
+        } else {
+            const video = await Video.findById(videoId)
+
+            if (!video) {
+                throw new Error("Video not found!")
+            } else {
+                video.viewers.push(user)
+
+                await video.save()
+
+                return video
+
+            }
+        }
+    } catch (error) {
+        throw new Error(err.message)
+    }
+
+
+
+}
+
+
+exports.deleteComment = async (commentId, videoId) => {
+    try {
+        const video = await Video.findById(videoId)
+
+        if (!video) {
+            throw new Error("Cannot find video")
+        } else {
+            const commentIndex = video.comments.indexOf(commentId)
+
+            if (commentIndex === - 1) {
+                throw new Error("Comment not found")
+            } else {
+                video.comments.splice(commentIndex, 1)
+
                 await video.save()
 
                 return video
             }
         }
+
     } catch (error) {
         throw new Error(error.message)
     }
