@@ -9,7 +9,7 @@ GET  /video: Lấy danh sách video(oke)
 
 GET /video/search?title=:title&page=:page: Tìm kiếm video dựa trên title(oke)
 GET /video/:id: Lấy một video cụ thể(oke)
-POST or PUT /video/:id: chỉnh sửa thông tin video(comment, thời gian, video mới, viewer, title, ...)
+POST or PUT /video/:id: chỉnh sửa thông tin video(comment, thời gian, video mới, viewer, title, ...)(oke)
 
 POST /video/:id/comment  or PUT /video/:id: Thêm comment cho video
 API: POST /video/:id/share	or PUT /video/:id

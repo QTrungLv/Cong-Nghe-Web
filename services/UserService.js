@@ -1,84 +1,28 @@
-
 const User = require('../models/User');
 const PAGE_SIZE = 2;
 
-class UserService{
- searchUserService = (name, page) => {
-    return new Promise(async (resolve, reject) => {
-        try{
-            if(page){
-                page = parseInt(page)
-                var skipNumber = (page-1)*PAGE_SIZE
-                const findName = await User.find({
-                    name:{$regex:name}
-                })
-                .skip(skipNumber)
-                .limit(PAGE_SIZE)
-                if(findName){
-                    resolve({
-                        status: 'OK', 
-                        data: findName
-                    })
-                }
-            }
-            resolve({
-                status: 'OK',
-                message: 'the user is not defined'
-            })
-        }catch(e){
-            console.log(e)
-            reject({
-                message: e,
-                status: 'err'
-            })
-        }
-    }).catch(e => e)
-}
+exports.getUserService = async (email) => {
+  try {
+    const findUser = await User.findOne({ email: email });
+    if (findUser) {
+      return findUser;
+    } else {
+      throw new Error('User not found');
+    }
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
 
- getUserService = (id) => {
-    return new Promise(async (resolve, reject) => {
-        try{
-            const findUser = await User.findById({_id: id})
-            if(findUser){
-                resolve({
-                    status: 'OK', 
-                    data: findUser
-                })
-            }
-            resolve({
-                status: 'OK',
-                message: 'the user is not defined'
-            })
-        }catch(err){
-            reject({
-                message: err,
-                status: 'err'
-            })
-        }
-    }).catch(e => e)
-}
-
- getDetailsUserService = () => {
-    return new Promise(async (resolve, reject) => {
-        try{
-            const findUser = await User.findOne({_id: '645ce5ba0a152a09451bdd51'})
-            if(findUser){
-                resolve({
-                    status: 'OK', 
-                    data: findUser
-                })
-            }
-            resolve({
-                status: 'OK',
-                message: 'the user is not defined'
-            })
-        }catch(err){
-            reject({
-                message: err,
-                status: 'err'
-            })
-        }
-    }).catch(e => e)
-}
-}
-module.exports = new UserService;
+exports.getDetailsUserService = async () => {
+  try {
+    const findUser = await User.findOne({ _id: '646cc416bc54df6fe056bcdb' });
+    if (findUser) {
+      return findUser;
+    } else {
+      throw new Error('User not define');
+    }
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};

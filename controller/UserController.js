@@ -1,41 +1,23 @@
-const { use } = require('passport')
-const userService = require('../services/UserService')
+const { use } = require('passport');
+const { searchUserService, getDetailsUserService, getUserService } = require('../services/UserService');
 
-class UserController{
+exports.detailsUserController = async (req, res) => {
+  getDetailsUserService()
+    .then((user) => {
+      res.send({ success: true, user });
+    })
+    .catch((err) => {
+      res.status(404).send({ success: false, err: err.message });
+    });
+};
 
- searchUserController = async (req, res) => {
-    try{
-        const { name, page } = req.query
-        if(name, page){
-            const response = await userService.searchUserService(name, page)
-            return res.json(response)
-        }else {
-            return res.json({
-                status: 'err',
-                message: 'The name is required'
-            })
-        }
-    }catch(err){
-        console.log(err)
-        return res.json({
-            status: 'err',
-            message: err
-        })
-    }
-  }
-
-   detailsUserController = async (req, res) => {
-    try{
-            const response = await userService.getDetailsUserService()
-            return res.json(response)
-        
-    }catch(e){
-        console.log(e)
-        return res.json({
-            status: 'err',
-        })
-    }
-}
-}
-
-module.exports = new UserController;
+exports.getUserController = async (req, res) => {
+  const { email } = req.params;
+  getUserService(email)
+    .then((user) => {
+      res.send({ success: true, user });
+    })
+    .catch((err) => {
+      res.status(404).send({ success: false, err: err.message });
+    });
+};
