@@ -14,7 +14,7 @@ exports.uploadImageToFirebase = (req) => {
     const storage = getStorage()
     console.log(1)
     if (!req.file) {
-        res.status(400).send("No file found!")
+        throw new Error('No video found!');
     }
     console.log(2)
     const StorageRef = ref(storage, req.file.originalname)

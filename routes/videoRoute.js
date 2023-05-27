@@ -23,6 +23,6 @@ router.delete(":id", verifyToken, videoController.deleteVideo)
 
 router.delete("/comment/:id", videoController.deleteComment)
 
-//router.post("/uploads", upload.single("video"), videoController.uploadVideo)
+router.post("/uploads", upload.single("video"), videoController.uploadVideo)
 
 module.exports = router
