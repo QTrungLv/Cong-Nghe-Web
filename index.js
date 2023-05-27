@@ -28,7 +28,6 @@ const connectDB = async () => {
 }
 connectDB()
 
-
 //route
 app.use("/user", userRoute)
 app.use("/video", videoRoute)
