@@ -32,12 +32,31 @@ GET /video/comment/:id: Lấy danh sách comment sẵn có của video --- Khong
 DELETE /video/comment/:id: Xóa comment ----Cái này để lại
 
 
+POST /user/login: Đăng nhập(oke)
+POST /user: Chỉnh sửa thông tin ---Cái này để lại---
+GET  /user/getInfo: Lấy thông tin người dùng(oke)
+
+POST /video: Thêm video
+GET  /video: Lấy danh sách video(oke)
+
+GET /video/search?title=:title&page=:page: Tìm kiếm video dựa trên title(oke)
+GET /video/:id: Lấy một video cụ thể(oke)
+POST or PUT /video/:id: chỉnh sửa thông tin video(comment, thời gian, video mới, viewer, title, ...)(oke)
 
 
+<<<<<<< HEAD
+=======
+Delete	API: DELETE /video/:id(oke)
+Sửa title	API: POST /video/:id/title	or PUT /video/:id
+>>>>>>> e165e4dc59762adc91942554cf77566f9963d831
 List 		API: POST /video/:id/list	or PUT /video/:id
 
 API: POST /video/:id/share	or PUT /video/:id
 
 API: POST /user/list		or PUT /user
+<<<<<<< HEAD
 
 API: DELETE /user/list
+=======
+API: DELETE /user/list
+>>>>>>> e165e4dc59762adc91942554cf77566f9963d831
