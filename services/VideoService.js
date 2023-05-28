@@ -1,6 +1,8 @@
 const Comment = require('../models/Comment')
-const User = require('../models/User')
-const Video = require('../models/Video')
+const User = require('../models/User');
+const Video = require('../models/Video');
+
+const PAGE_SIZE = 2;
 
 exports.addVideo = async (video) => {
   try {
@@ -116,9 +118,6 @@ exports.addViewer = async (userId, videoId) => {
   } catch (error) {
     throw new Error(err.message)
   }
-
-
-
 }
 
 
@@ -146,12 +145,6 @@ exports.deleteComment = async (commentId, videoId) => {
     throw new Error(error.message)
   }
 }
-/* eslint-disable class-methods-use-this */
-const User = require('../models/User');
-const Video = require('../models/Video');
-
-const PAGE_SIZE = 2;
-
 exports.searchVideoService = async (title, page) => {
   try {
     if (page) {

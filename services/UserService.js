@@ -37,7 +37,6 @@ exports.getInfoUserByEmail = async (_email) => {
 exports.updateUser = async (_id, user) => { }
 
 exports.deleteUser = async (_id) => { };
-const User = require('../models/User');
 const PAGE_SIZE = 2;
 
 exports.getUserService = async (email) => {

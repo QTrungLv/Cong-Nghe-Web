@@ -6,7 +6,6 @@ const morgan = require('morgan');
 
 const userRoute = require('./routes/userRoute')
 const videoRoute = require('./routes/videoRoute')
-const route = require('./routes');
 
 const app = express();
 

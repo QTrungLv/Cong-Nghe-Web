@@ -3,25 +3,35 @@ const multer = require('multer');
 
 const upload = multer({ storage: multer.memoryStorage() })
 
-const videoController = require('../controller/videoController')
+const videoController = require('../controller/VideoController')
 
 const verifyToken = require('../middleware/userMiddileware')
 
-router.post("/", videoController.addVideo)
+router.post("/", verifyToken, videoController.addVideo)
 
 router.get("/", verifyToken, videoController.getListVideo)
 
-router.get("/:id", videoController.getVideoById)
+router.get("/:id", verifyToken, videoController.getVideoById)
 
 //router.put("/:id", verifyToken, videoController.changeVideoTitle)
 
-router.post("/comment/:id", videoController.addCommentVideo)
+router.get('', verifyToken, videoController.getAllVideoController);
 
-router.post("/viewer/:id", videoController.addViewer)
+router.post("/comment/:id", verifyToken, videoController.addCommentVideo)
+
+router.post("/viewer/:id", verifyToken, videoController.addViewer)
 
 router.delete(":id", verifyToken, videoController.deleteVideo)
 
-router.delete("/comment/:id", videoController.deleteComment)
+router.delete("/comment/:id", verifyToken, videoController.deleteComment)
+
+router.post('/:id', verifyToken, videoController.updateVideoController);
+
+router.get('/search', verifyToken, videoController.searchVideoController);
+
+router.get('/:id', verifyToken, videoController.getVideoController);
+
+router.get('/delete/:id', verifyToken, videoController.deleteVideoController);
 
 router.post("/uploads", upload.single("video"), videoController.uploadVideo)
 
