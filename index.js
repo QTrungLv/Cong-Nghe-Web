@@ -28,7 +28,7 @@ const connectDB = async () => {
 connectDB()
 
 app.get("/", (req, res) => {
-  res.send("Hello, world!")
+  res.send({message: "Hello, world!"})
 })
 
 //route
