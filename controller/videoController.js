@@ -11,7 +11,6 @@ const {
   addViewer
 } = require('../services/VideoService');
 
-const { uploadImageToFirebase } = require('../services/uploadVideo');
 exports.searchVideoController = async (req, res) => {
   const { title, page } = req.query;
   searchVideoService(title, page)
@@ -19,7 +18,7 @@ exports.searchVideoController = async (req, res) => {
       res.send({ success: true, video });
     })
     .catch((err) => {
-      res.status(404).send({ success: false, err: err.message });
+      res.status(404).send({ success: false, message: err.message });
     });
 };
 
@@ -30,7 +29,7 @@ exports.getAllVideoController = async (req, res) => {
       res.send({ success: true, video });
     })
     .catch((err) => {
-      res.status(404).send({ success: false, err: err.message });
+      res.status(404).send({ success: false, message: err.message });
     });
 };
 
@@ -41,20 +40,18 @@ exports.getVideoController = async (req, res) => {
       res.send({ success: true, video });
     })
     .catch((err) => {
-      res.status(404).send({ success: false, err: err.message });
+      res.status(404).send({ success: false, message: err.message });
     });
 };
 
 exports.deleteVideoController = async (req, res) => {
   const _id = req.params.id;
-  videoService
-    .deleteVideoService(_id)
+  deleteVideoService(_id)
     .then((video) => {
       res.send({ success: true, video });
     })
     .catch((err) => {
-      s;
-      res.status(404).send({ success: false, err: err.message });
+      res.status(404).send({ success: false, message: err.message });
     });
 };
 
@@ -85,10 +82,6 @@ exports.addVideo = async (req, res) => {
     .catch(error => res.status(402).json({ success: false, message: error.message }))
 }
 
-exports.getListVideo = async (req, res) => {
-
-}
-
 exports.getVideoById = async (req, res) => {
   const _id = req.params.id
 
@@ -103,7 +96,7 @@ exports.changeVideoTitle = async (req, res) => {
 
   await changeVideoTitle({ _id: _id, title: title })
     .then((video) => res.send({ success: true, video: video }))
-    .catch((error) => res.status(406).json({ error: error.message }))
+    .catch((error) => res.status(406).json({ success: false, message: error.message }))
 
 
 }
@@ -120,18 +113,14 @@ exports.addCommentVideo = async (req, res) => {
 
   await addComment({ comment: comment, videoId: _id })
     .then((video) => res.send({ success: true, message: "Add comment successfully", video }))
-    .catch((err) => res.status(406).json(err.message))
-
-}
-
-exports.deleteVideo = async (req, res) => {
+    .catch((error) => res.status(406).json({ success: false, message: error.message }))
 
 }
 
 exports.uploadVideo = async (req, res) => {
   await uploadImageToFirebase(req)
     .then((url) => res.send(url))
-    .catch(error => res.status(409).json(error.message))
+    .catch(error => res.status(409).json({ success: false, message: error.message }))
 }
 
 exports.addViewer = async (req, res) => {
@@ -141,7 +130,7 @@ exports.addViewer = async (req, res) => {
 
   await addViewer(userId, videoId)
     .then((video) => res.send({ success: true, message: "Comment added successfully", video: video }))
-    .catch((err) => res.status(410).json(err.message))
+    .catch((error) => res.status(410).json({ success: false, message: error.message }))
 }
 
 

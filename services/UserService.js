@@ -21,18 +21,18 @@ exports.getInfoUserById = async (_id) => {
 }
 
 
-exports.getInfoUserByEmail = async (_email) => {
-  try {
-    const user = await User.findOne({ email: _email });
-    if (!user) {
-      throw new Error('User not found')
-    }
-    return user
-  } catch (error) {
-    throw new Error(error.message)
-  }
+// exports.getInfoUserByEmail = async (_email) => {
+//   try {
+//     const user = await User.findOne({ email: _email });
+//     if (!user) {
+//       throw new Error('User not found')
+//     }
+//     return user
+//   } catch (error) {
+//     throw new Error(error.message)
+//   }
 
-};
+// };
 
 exports.updateUser = async (_id, user) => { }
 
@@ -52,15 +52,4 @@ exports.getUserService = async (email) => {
   }
 };
 
-exports.getDetailsUserService = async () => {
-  try {
-    const findUser = await User.findOne({ _id: '646cc416bc54df6fe056bcdb' });
-    if (findUser) {
-      return findUser;
-    } else {
-      throw new Error('User not define');
-    }
-  } catch (error) {
-    throw new Error(error.message);
-  }
-};
+

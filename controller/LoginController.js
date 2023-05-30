@@ -51,7 +51,7 @@ passport.deserializeUser((user, done) => {
 
 class LoginController {
   fail(req, res) {
-    res.send('Failed to authenticate..');
+    res.status(401).json('Failed to authenticate..');
   }
 
   show(req, res) {
@@ -59,16 +59,14 @@ class LoginController {
   }
 
   index(req, res) {
-    console.log('1');
-
     res.send('<a href = "/user/login/auth/google">Authenticate with Google</a>');
   }
 
   login(req, res) {
-    const { isUser, email, name, avatar } = req.user;
+    const { email, name, avatar } = req.user;
+    console.log(req.user)
     const access_token = jwt.sign(
       {
-        isUser,
         email,
         name,
         avatar,
@@ -78,7 +76,8 @@ class LoginController {
     );
     console.log('access_token', { access_token });
 
-    res.redirect('/user/login/protected');
+    req.user ? res.send({ token: access_token }) : res.status(401).json({ error: 'User already logged in' });
+
   }
 }
 

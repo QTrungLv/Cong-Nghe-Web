@@ -2,7 +2,7 @@ const Comment = require('../models/Comment')
 const User = require('../models/User');
 const Video = require('../models/Video');
 
-const PAGE_SIZE = 2;
+const PAGE_SIZE = 10;
 
 exports.addVideo = async (video) => {
   try {
@@ -74,7 +74,7 @@ exports.addComment = async ({ comment, videoId }) => {
       } else {
 
         const newComment = new Comment({
-          id: 1,
+          id: "1",
           content: comment.comment,
           author: user
         })
@@ -87,7 +87,7 @@ exports.addComment = async ({ comment, videoId }) => {
 
         await newComment.save()
 
-        return video.populate("comments")
+        return video.populate('comments')
       }
     }
   } catch (error) {
@@ -102,8 +102,7 @@ exports.addViewer = async (userId, videoId) => {
     if (!user) {
       throw new Error("User not found!")
     } else {
-      const video = await Video.findById(videoId)
-
+      const video = await Video.findById({ _id: videoId }).populate('comments').populate('viewers')
       if (!video) {
         throw new Error("Video not found!")
       } else {
@@ -116,7 +115,7 @@ exports.addViewer = async (userId, videoId) => {
       }
     }
   } catch (error) {
-    throw new Error(err.message)
+    throw new Error(error.message)
   }
 }
 
@@ -125,16 +124,17 @@ exports.deleteComment = async (commentId, videoId) => {
   try {
     const video = await Video.findById(videoId)
 
+
     if (!video) {
       throw new Error("Cannot find video")
     } else {
       const commentIndex = video.comments.indexOf(commentId)
-
       if (commentIndex === - 1) {
         throw new Error("Comment not found")
       } else {
         video.comments.splice(commentIndex, 1)
-
+        video.populate("viewers")
+        video.populate("comments")
         await video.save()
 
         return video
@@ -209,9 +209,9 @@ exports.deleteVideoService = async (_id) => {
 
 exports.updateVideoService = async (id, data) => {
   try {
-    const checkVideo = await Video.findOne(data);
-    if (checkVideo) {
-      throw new Error('The info of user is duplicate');
+    const checkVideo = await Video.findOne({ _id: id });
+    if (!checkVideo) {
+      throw new Error('Video not found');
     }
     const updatedVideo = await Video.findByIdAndUpdate(id, data, {
       new: true,

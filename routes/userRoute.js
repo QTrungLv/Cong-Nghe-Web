@@ -10,10 +10,7 @@ const authMiddleware = require('../middleware/user');
 const userLoginController = require('../controller/LoginController');
 const userController = require('../controller/UserController');
 const userMiddleWare = require('../middleware/user');
-
-function isLoggedIn(req, res, next) {
-    req.user ? next() : res.sendStatus(401);
-}
+const verifyToken = require('../middleware/userMiddileware')
 
 router.use(session({ secret: 'cats' }));
 router.use(passport.initialize());
@@ -29,21 +26,13 @@ router.get(
     userLoginController.login
 );
 
-router.get("/", userController.getInfoUser);
-
-router.get("/:id", userController.getInfoUserById)
-
-router.post("/", userController.updateInfoUser)
-
-router.get('/:email', userController.getUserController);
-
-router.get('/getInfo', userController.detailsUserController);
-
 router.get('/login/auth/google/failure', userLoginController.fail)
 
-router.get('/login/protected', isLoggedIn, userLoginController.show);
+router.get('/person/login', userLoginController.index)
 
-router.get('/person/login', userLoginController.index);
+router.get("/:id", verifyToken, userController.getInfoUserById)
+
+router.get('/filter/:email', verifyToken, userController.getUserController);
 
 module.exports = router;
 
