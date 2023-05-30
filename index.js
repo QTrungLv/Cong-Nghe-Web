@@ -27,6 +27,10 @@ const connectDB = async () => {
 }
 connectDB()
 
+app.get("/", (req, res) => {
+  res.send("Hello, world!")
+})
+
 //route
 app.use("/user", userRoute)
 app.use("/video", videoRoute)
