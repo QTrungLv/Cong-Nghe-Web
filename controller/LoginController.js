@@ -8,13 +8,15 @@ const express = require('express');
 const User = require('../models/User');
 require('body-parser').json();
 
+require('dotenv').config()
+
 const JWT_SECRET = 'YOUR_JWT_SECRET';
 passport.use(
   new GoogleStrategy(
     {
       clientID: '613658840979-vlgba1s1g94h38vbe2q2r3ovh8t2169e.apps.googleusercontent.com',
       clientSecret: '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',
-      callbackURL: 'http://localhost:3000/user/login/auth/google/callback',
+      callbackURL: process.env.URL + '/user/login/auth/google/callback',
     },
     async (req, res, profile, done) => {
       try {
