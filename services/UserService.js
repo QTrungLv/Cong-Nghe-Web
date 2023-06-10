@@ -52,4 +52,19 @@ exports.getUserService = async (email) => {
   }
 };
 
+exports.checkUser = async (email) => {
+  try {
+    const user = await User.findOne({ email: email });
+
+    if (!user) {
+      return false;
+    }
+
+    return user;
+
+  } catch (error) {
+    throw new Error(error.message);
+  }
+}
+
 

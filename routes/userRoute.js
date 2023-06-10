@@ -34,6 +34,8 @@ router.get("/:id", verifyToken, userController.getInfoUserById)
 
 router.get('/filter/:email', verifyToken, userController.getUserController);
 
+router.post("/", userController.saveUser)
+
 module.exports = router;
 
 // successRedirect: '/login/protected',
